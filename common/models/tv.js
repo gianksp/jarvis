@@ -20,7 +20,10 @@ const API = {
   	"SWITCH_INPUT": "ssap://tv/switchInput",
   	"GET_INPUT": "ssap://tv/getExternalInputList",
   	"LAUNCH": "ssap://system.launcher/launch",
-  	"ENTER": "ssap://com.webos.service.ime/sendEnterKey"
+  	"ENTER": "ssap://com.webos.service.ime/sendEnterKey",
+    "PLAY": "ssap://media.controls/play",
+    "PAUSE": "ssap://media.controls/pause",
+    "STOP": "ssap://media.controls/stop"
 }
 
 module.exports = function(Tv) {
@@ -61,6 +64,30 @@ module.exports = function(Tv) {
     	}, function(err) {
     		cb(err);
     	});
+    }
+
+    Tv.play = function(id, cb) {
+    request(id, API.PLAY, {}).then(function(response) {
+        cb(null, response);
+      }, function(err) {
+        cb(err);
+      });
+    }
+
+    Tv.pause = function(id, cb) {
+    request(id, API.PAUSE, {}).then(function(response) {
+        cb(null, response);
+      }, function(err) {
+        cb(err);
+      });
+    }
+
+    Tv.stop = function(id, cb) {
+    request(id, API.STOP, {}).then(function(response) {
+        cb(null, response);
+      }, function(err) {
+        cb(err);
+      });
     }
 
     Tv.toast = function(id, msg, cb) {
@@ -231,6 +258,27 @@ module.exports = function(Tv) {
     	accepts: {arg: 'id', type: 'string'},
   		returns: {arg: 'success', type: 'string'},
   		http: {path: '/:id/enter', verb: 'get'}
+    });
+
+    Tv.remoteMethod('play', {
+      description: 'Play',
+      accepts: {arg: 'id', type: 'string'},
+      returns: {arg: 'success', type: 'string'},
+      http: {path: '/:id/play', verb: 'get'}
+    });
+
+    Tv.remoteMethod('stop', {
+      description: 'Stop',
+      accepts: {arg: 'id', type: 'string'},
+      returns: {arg: 'services', type: 'string'},
+      http: {path: '/:id/stop', verb: 'get'}
+    });
+
+    Tv.remoteMethod('pause', {
+      description: 'Pause',
+      accepts: {arg: 'id', type: 'string'},
+      returns: {arg: 'success', type: 'string'},
+      http: {path: '/:id/pause', verb: 'get'}
     });
 
   	function connect(id) {
