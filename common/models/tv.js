@@ -306,7 +306,7 @@ module.exports = function(Tv) {
 			      connection.request(command, payload, function(err, res) {
 			        if(res.returnValue == true)
 			          connection.disconnect();
-			      	resolve(true);
+			      	resolve(res);
 			      });
 			    }).on("error", function(err) {
 			      if(err.code == 'ECONNREFUSED') {
