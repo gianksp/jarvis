@@ -249,7 +249,7 @@ module.exports = function(Tv) {
     Tv.remoteMethod('getServiceList', {
     	description: 'Get service list from device for the specified {{id}}',
     	accepts: {arg: 'id', type: 'string'},
-  		returns: {arg: 'services', type: 'string'},
+  		returns: {arg: 'services', type: 'array'},
   		http: {path: '/:id/services', verb: 'get'}
     });
 
