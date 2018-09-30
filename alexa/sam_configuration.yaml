@@ -1,0 +1,28 @@
+﻿AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: >-
+  Please use alexa-skills-kit-nodejs-factskill from the Serverless Application
+  Repository
+Resources:
+  Home:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs6.10
+      CodeUri: .
+      Description: >-
+        Please use alexa-skills-kit-nodejs-factskill from the Serverless
+        Application Repository
+      MemorySize: 128
+      Timeout: 7
+      Role: 'arn:aws:iam::874573173295:role/lambda_basic_execution'
+      Events:
+        AlexaSkillEvent:
+          Type: AlexaSkill
+      Environment:
+        Variables:
+          IP: 'YOUR_API_URL'
+          PORT: 'YOUR_API_PORT'
+          TV_ID: 'YOUR_TV_ID'
+      Tags:
+        'lambda-console:blueprint': alexa-skill-kit-sdk-factskill
