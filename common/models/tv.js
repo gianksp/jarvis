@@ -309,13 +309,9 @@ module.exports = function(Tv) {
 			      	resolve(res);
 			      });
 			    }).on("error", function(err) {
-			      if(err.code == 'ECONNREFUSED') {
-			        setTimeout(Tv.off(id, cb), 2000);
-			      } else {
 			        console.error(`Error while running request command ${command}:`, err);
-			        connection.disconnect();
-			        reject(new HttpError(500, err));
-			      }
+              connection.disconnect();
+              reject(new HttpError(500, err));
 			    });
 	    	}, function(error) {
 	    		reject(error);
@@ -334,13 +330,9 @@ module.exports = function(Tv) {
 			      	resolve(true);
 			      });
 			    }).on("error", function(err) {
-			      if(err.code == 'ECONNREFUSED') {
-			        setTimeout(Tv.off(id, cb), 2000);
-			      } else {
 			        console.error(`Error while running subscribe command ${command}:`, err);
-			        connection.disconnect();
-			      }
-			      reject(new HttpError(500, err));
+              connection.disconnect();
+			        reject(new HttpError(500, err));
 			    });
 	    	}, function(error) {
 	    		reject(error);
